@@ -1,0 +1,167 @@
+{
+  "name": "chatgpt-context-companion-vscode",
+  "displayName": "chatgpt-context-companion-vscode",
+  "description": "Context Companion",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Chatgpt Context Companion",
+      "properties": {
+
+        "chatgptcontextcompanion.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for ChatGPT"
+        },
+        "chatgptcontextcompanion.apiEndpoint": {
+          "type": "string",
+          "default": "https://api.openai.com/v1/chat/completions",
+          "description": "API Endpoint for ChatGPT"
+        },
+        "chatgptcontextcompanion.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "description": "ChatGPT Model"
+        },
+        "chatgptcontextcompanion.maxTokens": {
+          "type": "integer",
+          "default": "300",
+          "description": "Max Tokens for ChatGpt"
+        },
+        "chatgptcontextcompanion.prompts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "label",
+              "value"
+            ]
+          },
+          "default": [
+            {
+              "label": "%s",
+              "value": "%s"
+            },
+            {
+              "label": "Explain the following code %s",
+              "value": "Explain the following code: ``` %s ```"
+            },
+            {
+              "label": "Write a Test for the  following code %s",
+              "value": "Write a Test for the  following code : ``` %s ```"
+            },
+            {
+              "label": "Refactor the  following code %s",
+              "value": "Refactor the  following code : ``` %s ```"
+            },
+            {
+              "label": "What can be the filename",
+              "value": "What can be the filename for the following code : ``` %fc ```"
+            },
+            {
+              "label": "Refactor selected code with better names",
+              "value": "Refactor the following code with better names : ``` %s ```"
+            },
+            {
+              "label": "Summarize %s in a sentence",
+              "value": "Summarize the following text: %s"
+            },
+            {
+              "label": "Create a Social Media Post about %s",
+              "value": "create a social media post about %s"
+            },
+            {
+              "label": "Compose Sentence based on %s",
+              "value": "Compose Sentence based on the following text: %s"
+            },
+            {
+              "label": "Reply based on %s",
+              "value": "Reply based on the following text: %s"
+            },
+            {
+              "label": "Compose an email for %s",
+              "value": "Compose an email for the following text: %s"
+            },
+            {
+              "label": "Reply as email for %s",
+              "value": "Reply an email for the following text: %s"
+            }
+          ],
+          "description": "List of options to display in the Quick Pick menu."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "chatgptcontextcompanion.showOptions",
+        "title": "CHATGPT Context Companion > Show Options"
+      },
+      {
+        "command": "chatgptcontextcompanion.setApiKey",     
+        "title": "CHATGPT Context Companion > Set Api Key"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "chatgptcontextcompanion.showOptions",
+        "key": "ctrl+m",
+        "mac": "cmd+m",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "chatgptcontextcompanion.setApiKey",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/markdown-it": "^12.2.3",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.78.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "dependencies": {
+    "@ts-stack/markdown": "^1.4.0",
+    "markdown-it": "^13.0.1",
+    "node-fetch": "^3.3.1"
+  }
+}
