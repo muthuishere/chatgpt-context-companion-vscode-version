@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
-// const vscode = require('vscode');
-
 import fetch from 'node-fetch';
 import { TextDecoder } from 'node:util';
 
@@ -113,12 +109,6 @@ export async function sendChatGPTRequest(message: any, options: { apiUrl: any; m
     const { apiUrl, model, apiKey, max_tokens } = options;
 
 
-    // const apiUrl= "https://api.openai.com/v1/chat/completions";
-    // const model="gpt-3.5-turbo";
-    // const apiKey="";
-    // const valid_but_error_apiKey="";
-    // const max_tokens= 500;
-    // const message = "example for fibonacci program in golang"
 
     const data = { "messages": [{ "role": "user", "content": message }],
      "temperature": 0.7, 

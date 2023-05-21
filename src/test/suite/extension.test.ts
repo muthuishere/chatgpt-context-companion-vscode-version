@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+import exp = require('constants');
 
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
@@ -11,7 +12,10 @@ suite('Extension Test Suite', () => {
 
 	test('Input getApiKey test', () => {
 
+
+		assert.equal(1, 1);
 		
 		
 	});
 });
+

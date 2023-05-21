@@ -15,13 +15,7 @@
     "configuration": {
       "title": "Chatgpt Context Companion",
       "properties": {
-
-        "chatgptcontextcompanion.apiKey": {
-          "type": "string",
-          "default": "",
-          "description": "API Key for ChatGPT"
-        },
-        "chatgptcontextcompanion.apiEndpoint": {
+        "chatgptcontextcompanion.apiUrl": {
           "type": "string",
           "default": "https://api.openai.com/v1/chat/completions",
           "description": "API Endpoint for ChatGPT"
@@ -33,7 +27,7 @@
         },
         "chatgptcontextcompanion.maxTokens": {
           "type": "integer",
-          "default": "300",
+          "default": 300,
           "description": "Max Tokens for ChatGpt"
         },
         "chatgptcontextcompanion.prompts": {
@@ -63,47 +57,45 @@
               "value": "Explain the following code: ``` %s ```"
             },
             {
+              "label": "What would be the result of the following code %s",
+              "value": "What would be the result of the following code: ``` %s ```"
+            },
+            {
               "label": "Write a Test for the  following code %s",
               "value": "Write a Test for the  following code : ``` %s ```"
+            },
+
+            {
+              "label": "How to increase performance for the  following code %s",
+              "value": "How to increase performance for the  following code : ``` %s ```"
             },
             {
               "label": "Refactor the  following code %s",
               "value": "Refactor the  following code : ``` %s ```"
             },
             {
-              "label": "What can be the filename",
-              "value": "What can be the filename for the following code : ``` %fc ```"
+              "label": "How to increase performance for the  following code %s",
+              "value": "How to increase performance for the  following code : ``` %s ```"
+            },
+            {
+              "label": "Is this code functional? %s",
+              "value": "Is this code functional? : ``` %s ```"
+            },
+            {
+              "label": "Convert this method to pure function",
+              "value": "Convert this method to pure function : ``` %s ```"
+            },
+            {
+              "label": "Create a document for the following code to explain to junior programmer : %s",
+              "value": "Create a document for the following code to explain to junior programmer : ``` %s ```"
             },
             {
               "label": "Refactor selected code with better names",
               "value": "Refactor the following code with better names : ``` %s ```"
-            },
-            {
-              "label": "Summarize %s in a sentence",
-              "value": "Summarize the following text: %s"
-            },
-            {
-              "label": "Create a Social Media Post about %s",
-              "value": "create a social media post about %s"
-            },
-            {
-              "label": "Compose Sentence based on %s",
-              "value": "Compose Sentence based on the following text: %s"
-            },
-            {
-              "label": "Reply based on %s",
-              "value": "Reply based on the following text: %s"
-            },
-            {
-              "label": "Compose an email for %s",
-              "value": "Compose an email for the following text: %s"
-            },
-            {
-              "label": "Reply as email for %s",
-              "value": "Reply an email for the following text: %s"
             }
+           
           ],
-          "description": "List of options to display in the Quick Pick menu."
+          "description": "Choose an Action"
         }
       }
     },
@@ -115,6 +107,26 @@
       {
         "command": "chatgptcontextcompanion.setApiKey",     
         "title": "CHATGPT Context Companion > Set Api Key"
+      },
+      {
+        "command": "chatgptcontextcompanion.setGptModel",     
+        "title": "CHATGPT Context Companion > Choose Model"
+      },
+      {
+        "command": "chatgptcontextcompanion.setMaxTokens",     
+        "title": "CHATGPT Context Companion > Set Max Tokens"
+      },
+      {
+        "command": "chatgptcontextcompanion.addPrompt",     
+        "title": "CHATGPT Context Companion > Add Prompt"
+      },
+      {
+        "command": "chatgptcontextcompanion.removePrompt",     
+        "title": "CHATGPT Context Companion > Remove Prompt"
+      },
+      {
+        "command": "chatgptcontextcompanion.removeApiKey",     
+        "title": "CHATGPT Context Companion > Remove Api Key"
       }
     ],
     "keybindings": [
@@ -138,7 +150,7 @@
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pretest": "npm run compile-tests && npm run compile",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },

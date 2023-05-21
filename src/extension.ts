@@ -4,9 +4,12 @@ import * as vscode from 'vscode';
 import * as promptcontainer from './components/quickMenuContainer';
 import { join } from 'path';
 import {  createWebViewPanel, deactivatePanel } from './panels/responsepanel';
-import { updateSecretStore } from './services/apiKeyService';
-import { getChatGptResponseCommand } from './components/chatGptResponseCmdContainer';
-import { getApiKeyContainer } from './components/apiKeyInputContainer';
+import { setSecretStore } from './services/configStoreService';
+import { getChatGptResponseCommand } from './components/chatGptResponseContainer';
+import { getApiKeyContainer, getRemoveApiKeyContainer } from './components/apiKeyInputContainer';
+import { getMaxTokenInputContainer } from './components/maxtokenInputContainer';
+import { getModelInputContainer } from './components/modelInputContainer';
+import { getRemovePromptContainer,getAddPromptContainer } from './components/promptmanageContainer';
 
 
 
@@ -20,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 	 
 	const panel =  createWebViewPanel(loadingHtmlPath);
 
-	updateSecretStore(context.secrets);
+	setSecretStore(context.secrets);
 
 	const chatgptResponseCommand =getChatGptResponseCommand();
 
@@ -28,6 +31,11 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(chatgptResponseCommand);
 	context.subscriptions.push(panel);
 	context.subscriptions.push(getApiKeyContainer());
+	context.subscriptions.push(getMaxTokenInputContainer());
+	context.subscriptions.push(getModelInputContainer());
+	context.subscriptions.push(getRemoveApiKeyContainer());
+	context.subscriptions.push(getRemovePromptContainer());
+	context.subscriptions.push(getAddPromptContainer());
     
 
 }

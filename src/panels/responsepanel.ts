@@ -115,6 +115,12 @@ export function updateQuestion(question: string) {
     });
 }
 export function showError(response: string) {
+// if response contains invalid_api_key
+
+// remove api key from storage
+if(response.includes("invalid_api_key")){
+    vscode.commands.executeCommand('chatgptcontextcompanion.removeApiKey');
+}
  panel?.webview.postMessage({
         command: 'showError',
         content: response

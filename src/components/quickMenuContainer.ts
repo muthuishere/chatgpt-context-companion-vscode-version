@@ -1,18 +1,36 @@
 import * as vscode from 'vscode';
+import { getPromptsFromStorage, movePromptToTop } from '../services/configStoreService';
 
 
-function getFormattedText(selectedText: string,input: string){
-	return input.replace("%s",selectedText);
+function getFormattedText(rules: any,input: string){
+
+
+	let result = input;
+	//iterate over rules
+	for(let i=0;i<rules.length;i++){
+		const rule = rules[i];
+		result = result.replace(rule.find,rule.replace);
+	}
+
+
+
+	return result;
 }
 export function getQuickMenu(){
     let menudisposable = vscode.commands.registerCommand('chatgptcontextcompanion.showOptions', () => {
 		const quickPick = vscode.window.createQuickPick();
-        const items:any = vscode.workspace.getConfiguration().get('chatgptcontextcompanion.prompts');
+        const items:any = getPromptsFromStorage();;
         
 
-		const text = getSelectedText();
+		const selectedText = getSelectedText();
 
-		quickPick.items = items.map((item: { label: any; value: any; }) => ({ label: getFormattedText(text,item.label), value: getFormattedText(text,item.value) }));
+		const replacementRules =[
+			{
+				"find":"%s",
+				"replace":selectedText
+			}
+		];
+		quickPick.items = items.map((item: { label: any; value: any; }) => ({ label: getFormattedText(replacementRules,item.label), value: getFormattedText(replacementRules,item.value) }));
 		
 		quickPick.onDidChangeSelection(async (obj) => {
  
@@ -27,6 +45,7 @@ export function getQuickMenu(){
 				}, 100);
 				quickPick.hide();
  
+				movePromptToTop(item);
 
 			
 				
@@ -57,4 +76,14 @@ function getSelectedText() {
 		text = editor.document.getText(selection);
 	}
 	return text;
+}
+
+function getActiveFileName(){
+	// get active activeTextEditor file name
+	let editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		return ""; // No open text editor
+	}
+	let document = editor.document;
+	return document.fileName;
 }

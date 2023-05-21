@@ -34,6 +34,14 @@
     position: relative;
     max-width: 80%;
 }
+pre{
+
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+
+}
 code{
     font-size: 7px!important;
 }
@@ -66,10 +74,10 @@ code{
 
     <div class="chat-container" id="chat-container" style="display: none;">
         <div class="chat-bubble question">
-            <p id="question">Question text...</p>
+            <p id="question"></p>
         </div>
         <div class="chat-bubble answer">
-            <p id="answer">Answer text...</p>
+            <p id="answer"></p>
             <button id="copyButton"   style="visibility: hidden;">Copy</button>
             <input id="markuptext" type="hidden" id="copyText" value=""/>
 
@@ -84,11 +92,16 @@ code{
     <script>
         const vscode = acquireVsCodeApi();
        
+        function clearAnswer(){
+            document.getElementById("answer").innerHTML =  "" ;
+            document.getElementById("markuptext").value =  "" ;
+        }
         function showContentIndicators(){
             document.getElementById("loading-container").style.display = "none";
                 document.getElementById("error-container").style.display = "none";
                 
                 document.getElementById("chat-container").style.display = "";
+               
 
         }
         function showCopyPaste(){
@@ -112,12 +125,14 @@ code{
                 case 'updateQuestion':
                     showContentIndicators();
                     hideCopyPaste();
+                    clearAnswer();
                     document.getElementById("question").innerHTML =  message.content ;
                     break;  
                 case 'updatePartial':
+                 
+                    document.getElementById("answer").innerHTML =  message.content ;
                     showContentIndicators();
                     hideCopyPaste();
-                    document.getElementById("answer").innerHTML =  message.content ;
                     break;  
                 case 'updateFull':
                     showContentIndicators();                    

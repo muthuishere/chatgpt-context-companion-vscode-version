@@ -1,4 +1,4 @@
-import { getApiKeyFromStorage, saveApiKeyToStorage } from "../services/apiKeyService";
+import { getApiKeyFromStorage, removeApiKeyToStorage, saveApiKeyToStorage } from "../services/configStoreService";
 import * as vscode from 'vscode';
 
 
@@ -6,6 +6,13 @@ export function getApiKeyContainer(){
     return vscode.commands.registerCommand('chatgptcontextcompanion.setApiKey', async () => {		
        let apiKey = await getApiKeyFromUser();
         await saveApiKeyToStorage(apiKey);
+	});
+    
+}
+
+export function getRemoveApiKeyContainer(){
+    return vscode.commands.registerCommand('chatgptcontextcompanion.removeApiKey', async () => {		       
+        await removeApiKeyToStorage();
 	});
     
 }
