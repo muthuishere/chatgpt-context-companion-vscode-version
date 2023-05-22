@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as promptcontainer from './components/quickMenuContainer';
+import * as promptcontainer from './components/showPromptsContainer';
 import { join } from 'path';
 import {  createWebViewPanel, deactivatePanel } from './panels/responsepanel';
 import { setSecretStore } from './services/configStoreService';
@@ -9,7 +9,7 @@ import { getChatGptResponseCommand } from './components/chatGptResponseContainer
 import { getApiKeyContainer, getRemoveApiKeyContainer } from './components/apiKeyInputContainer';
 import { getMaxTokenInputContainer } from './components/maxtokenInputContainer';
 import { getModelInputContainer } from './components/modelInputContainer';
-import { getRemovePromptContainer,getAddPromptContainer } from './components/promptmanageContainer';
+import { getRemovePromptContainer,getAddPromptContainer, getResetPromptContainer } from './components/promptmanageContainer';
 
 
 
@@ -36,6 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(getRemoveApiKeyContainer());
 	context.subscriptions.push(getRemovePromptContainer());
 	context.subscriptions.push(getAddPromptContainer());
+	context.subscriptions.push(getResetPromptContainer());
     
 
 }

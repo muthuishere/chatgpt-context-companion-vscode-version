@@ -77,8 +77,15 @@ export async function removePromptFromStorage(selectedLabel:string | undefined) 
             // Update the configuration
             await vscode.workspace.getConfiguration().update('chatgptcontextcompanion.prompts', newPrompts, vscode.ConfigurationTarget.Global);
         
-    vscode.window.showInformationMessage('removed prompt!' +selectedLabel);
+    vscode.window.showInformationMessage('Success : removed prompt!' +selectedLabel);
     }
+}
+export async function resetPromptsInStorage() {
+    
+        await vscode.workspace.getConfiguration().update('chatgptcontextcompanion.prompts', undefined, vscode.ConfigurationTarget.Global);
+
+    vscode.window.showInformationMessage('Success : reset prompts to default!');
+    
 }
 export async function addPromptToStorage(label:string, value:string) {
     if(value){
@@ -87,19 +94,33 @@ export async function addPromptToStorage(label:string, value:string) {
         prompts.push({label,value});
         await vscode.workspace.getConfiguration().update('chatgptcontextcompanion.prompts', prompts, vscode.ConfigurationTarget.Global);
 
-    vscode.window.showInformationMessage('added prompt!' +label);
+    vscode.window.showInformationMessage('Success : added prompt!' +label);
     }
 }
 
 export async function movePromptToTop(prompt:any) {
     let prompts = await getPromptsFromStorage();
 
-    const promptIndex = prompts.findIndex((item:any) => item.label === prompt.label);
-    if (promptIndex === 0) {
+    
+    let promptToBeMoved =null;
+    let filteredPrompts =[];
+
+    for(let i = 0; i < prompts.length; i++) {
+        if(prompts[i].label === prompt.label) {
+            promptToBeMoved=prompts[i];
+        }else{
+            filteredPrompts.push(prompts[i]);
+        }
+    }
+
+  
+    
+    if (promptToBeMoved === null) {
         return;
     }
-    const promptToMove = prompts.splice(promptIndex, 1)[0];
-    prompts.unshift(promptToMove);
-    await vscode.workspace.getConfiguration().update('chatgptcontextcompanion.prompts', prompts, vscode.ConfigurationTarget.Global);
+    
+     const newArray = [promptToBeMoved];
+     const results  = newArray.concat(filteredPrompts);
+    await vscode.workspace.getConfiguration().update('chatgptcontextcompanion.prompts', results, vscode.ConfigurationTarget.Global);
 
 }

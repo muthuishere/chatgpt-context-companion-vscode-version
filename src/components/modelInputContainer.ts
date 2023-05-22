@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { getModelFromStorage, saveModelToStorage } from "../services/configStoreService";
 import * as vscode from 'vscode';
 

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { addPromptToStorage, getPromptsFromStorage, removePromptFromStorage } from '../services/configStoreService';
+import { addPromptToStorage, getPromptsFromStorage, removePromptFromStorage, resetPromptsInStorage } from '../services/configStoreService';
 
 
 export function getRemovePromptContainer() {
@@ -10,6 +10,21 @@ export function getRemovePromptContainer() {
             const selectedLabel = await vscode.window.showQuickPick(prompts.map(prompt => prompt.label));
 
             await removePromptFromStorage(selectedLabel);
+        } catch (error) {            
+            handleError(error);
+        }
+
+
+    });
+}
+
+
+export function getResetPromptContainer() {
+    return vscode.commands.registerCommand('chatgptcontextcompanion.resetPrompts', async () => {
+
+        try {
+           await resetPromptsInStorage();
+          
         } catch (error) {            
             handleError(error);
         }

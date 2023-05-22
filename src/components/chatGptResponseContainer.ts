@@ -7,8 +7,6 @@ import { getApiUrlFromStorage, getMaxTokensFromStorage, getModelFromStorage } fr
 
 export function getChatGptResponseCommand(){
 	return vscode.commands.registerCommand('chatgptcontextcompanion.executeChatGptResponse', async (item) => {
-		console.log("chatgptcontextcompanion.executeChatGptResponse",item);
-
 
 		let apiKey = await getApiKey();
 		const model =await getModelFromStorage();
@@ -40,7 +38,7 @@ async function getChatGptResponseFor(item: any,input:any) {
 
 
 	const{model,apiUrl,apiKey,maxTokens} = input;
-	console.log("getChatGptResponseFor input",input);
+	// console.log("getChatGptResponseFor input",input);
 	showPanel();
 	
 	const options = {
