@@ -1,71 +1,62 @@
-# chatgpt-context-companion-vscode README
+# ChatGpt Context Companion for Visual Studio Code
 
-This is the README for your extension "chatgpt-context-companion-vscode". After writing up a brief description, we recommend including the following sections.
+ChatGpt Context Companion is a VS Code extension that utilizes Open AI technology to enhance your development experience. This extension allows you to customize prompts from the context menu and get AI-generated responses, making your coding faster, smarter and more efficient.
+
+## Pre-requisties
+
+You might need an Open AI key from [here](https://platform.openai.com/account/api-keys) to use this extension.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* Customizable Prompts: Create and use your own prompts based on your unique coding style or requirements. 
+* Quick Menu Integration: Easily access the ChatGpt Context Companion from Quick menu to get help with your coding (Ctrl + m in windows / Cmd + m in Mac ). 
+* OpenAi Generated Answers: Get instant, intelligent responses from the OpenAI to help you code more effectively.
+* Configurable Settings: Make the extension work for you by customizing and configuring it to suit your needs. You can set API Key , Choose Model through settings.
 
-For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+## Installation
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. Open **Extensions** sidebar panel in Visual Studio Code. `View → Extensions`.
+2. Search for `ChatGpt Context Companion - Vscode`.
+3. Click **Install** to install it.
+4. Click **Reload** to reload the your editor.
+5. Code away with the help of your new ChatGpt Context Companion!
 
-## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## How to Use
 
-For example:
+- Type Ctrl M in windows or Cmd M in mac at end of line or selection to show up the prompts and choose the prompt you want to use and press  "Enter", and the AI will generate the response based on your command and display in a side panel.
 
-This extension contributes the following settings:
+- Type Ctrl + Shift + P  in windows / Cmd + Shift + P in Mac  for settings
+- Type "ChatGpt Context Companion".
+    - Choose "Set API Key" to set your API Key.    
+    - Choose "Choose Model" to set your Model (Currently we support GPT 3.5 /GPT 4 / GPT 4 (32k)).
+    - Choose "Set Max Tokens " to set the maximum tokens to use for the completion (default is 300).
+    - Choose "Add Prompt" to add a prompt.
+        - Prompt can be a string or a json.
+        - use %s within prompt to get selected text within prompt.
+        - Some Sample Prompts
+            - <code>  What is the output of %s ? </code>
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+            - <code> {
+              "label": "Explain %s",
+              "value": "Explain the following code to junior developer :  %s "
+            }</code>
 
-## Known Issues
+    - Choose "Remove Prompt" to  remove prompt
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
-## Release Notes
 
-Users appreciate release notes as you update your extension.
 
-### 1.0.0
 
-Initial release of ...
 
-### 1.0.1
 
-Fixed issue #.
+## Feedback
 
-### 1.1.0
+If you have suggestions or issues, please [file an issue](https://www.reddit.com/r/writeassistchatgpt/).
 
-Added features X, Y, and Z.
 
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
